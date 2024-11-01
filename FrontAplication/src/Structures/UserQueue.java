@@ -20,12 +20,22 @@ public class UserQueue {
           return last == size - 1;
      }
 
+      public boolean isComplete(){
+          return count == queue.length;
+     }
+
      public boolean enqueue(User user) {
 
           if (isFull()) {
                System.out.println("Queue is full");
                return false;
           }
+          
+          if (isComplete()) {
+               System.out.println("Queue is Complete");
+               return false;
+          }
+          
           last++; // incrementa last diretamente, pois a fila não é circular
           queue[last] = user;
           count++;
@@ -34,15 +44,16 @@ public class UserQueue {
 
      public User dequeue() {
 
-          if (isEmpty()) {
+         if (isEmpty()) {
                System.out.println("Queue is empty");
                return null;
           }
-
-          User user = queue[last];
+          User user = queue[first];
+          for (int i = first; i < last; i++) {
+               queue[i] = queue[i + 1]; // Move todos os elementos para a esquerda
+          }
           queue[last] = null; // Limpa a última posição
           last--; // Decrementa o índice do último
-          count--;
           return user;
      }
 
