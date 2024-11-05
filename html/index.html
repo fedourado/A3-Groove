@@ -5,36 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Groove</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="shortcut icon" href="../img/favicon-3.png">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="shortcut icon" href="../img/favicon (1).png">
     <style>@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,300;0,400;0,500;0,800;1,200;1,300;1,400;1,500;1,800&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,800;1,200;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
     </style>
-    <link rel="stylesheet" href="../style.css">
+  
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg bs-body-color-D7B600" style="height: 120px; padding: 0 0 0 0;">
+    <header class=".col-">
+      <nav class="navbar navbar-expand-lg bs-body-color-D7B600" style="height: 100px; padding: 0 0 0 0;">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.html" style="padding: 40px;">
-            <img src="../img/Logo-png.png" alt="Logo" width="180" height="80">
+            <img src="../img/Logo-correto (1).png" alt="Logo" width="120" height="80">
           </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" style="font-family: poppins; font-weight: 600; color: #F2F2F2; font-size: 20px;" href="#">SOBRE</a>
+          <div class="collapse navbar-collapse ml-auto" id="navbarText">
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+              <li class="nav-item ml-auto">
+                <a class="nav-link active" aria-current="page" style="font-family: poppins; font-weight: 600; color: #1F1717; font-size: 20px;" href="#">SOBRE</a>
               </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="#" style="font-family: poppins; font-weight: 600; color: #F2F2F2; font-size: 20px;">FILA</a>
+              <li class="nav-item ml-auto">
+                <a class="nav-link" href="#" style="font-family: poppins; font-weight: 600; color: #1F1717; font-size: 20px;">FILA</a>
               </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="#" style="font-family: poppins; font-weight: 600; color: #F2F2F2; font-size: 20px;">INSCREVA-SE</a>
+              <li class="nav-item ml-auto">
+                <a href="#" class="btn btn-danger" style="font-family: poppins; font-weight: 600; color: #F2F2F2; font-size: 20px; border-radius: 0px;">INSCREVA-SE</a>
               </li>
             </ul>
           </div>
@@ -42,23 +43,22 @@
       </nav>
     </header>
 
-    <bodier>
-      <div class="card mb-3" style="width: 100%; height: 790px; border-radius: 0px;">
-        <img src="../img/background.png" class="card-img-top" alt="..." style="border-radius: 0px;">
-        <div class="card-body">
-        </div>
+    <bodier class=".col-">
+      <div class="card mb-3" style="border-radius: 0px;">
+        <img src="../img/background.png" class="card-img-top" alt="..." style="border-radius: 0px; width: 100%;">
       </div>
 
-      <div class="col-sm-0">
-      <div class="card text-center" style="height: 200px; font-family: poppins; font-weight: 400; font-size: 24px; color: #F2F2F2;  height: 200px; border-radius: 0px; background-color: #c62a2a;">
-        <div class="card-body">
-          AS MELHORES BANDAS REUNIDAS EM UM ÚNICO FESTIVAL
-        </div>
-      </div>
-    </div>
+
+          <div class=".col-">
+            <div class="card text-center" style="height: 200px; font-family: poppins; font-weight: 400; font-size: 24px; color: #F2F2F2; border-radius: 0px; background-color: #1F1717;">
+              <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                AS MELHORES BANDAS REUNIDAS EM UM ÚNICO FESTIVAL
+              </div>
+            </div>
+          </div>
 
 
-    <div id="carouselExampleCaptions" class="carousel slide">
+    <div data-interval="500" id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -71,41 +71,108 @@
           <img src="../img/day2-poppunk.png" class="d-block w-100" alt="...">
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
 
-    <div class="card text-center" style="height: 400px; font-family: poppins; background-color: #1F1717;">
-      <div class="card-body">
 
-        <div style="font-family: poppins; font-size: 30px; color: #F2F2F2;">
-        <p class="card-text">QUER SER UM DOS PRIMEIROS A CONSEGUIR O INGRESSO?</p>
-        <p class="card-text">INSCREVA-SE E GARANTA SEU LUGAR NA FILA </p>
+        <div class=".col-">
+
+          <div class="card text-center" style="height: 250px; font-family: poppins; font-weight: 400; font-size: 24px; color: #F2F2F2; border-radius: 0px; background-color: #1F1717;">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+              QUER SER UM DOS PRIMEIROS A CONSEGUIR O INGRESSO?
+              <br>
+              INSCREVA-SE E GARANTA SEU LUGAR NA FILA
+            </div>
+            
+          </div>
+
+          <a href="" class="btn btn-danger btn-lg" role="button" style="font-family: poppins; border-radius: 0px; color: #F2F2F2; font-weight: 600;">INSCREVA-SE</a>
+
         </div>
 
-        <button id="btn-inscreva" class="btn btn-primary" style="border-radius: 0px;">
-            <a href="#" class="btn btn-primary" style="font-family: poppins; font-size: 24px;">INSCREVA-SE</a>
-        </button>
+
+
 
         </div>
     </div>
 
     </bodier>
 
-    <footer>
+    <footer class="footer" style="height: 800px; background-color: bisque;">
+  
+      <div class="container">
       
-      <div class="card" style="border-radius: 0px; height: 800px; background-color: #847676;">
-        <div class="card-body">
-          Footer aqui
+        <div class="row">
+          
+          <div class="col-md-6 col-lg-4">
+
+          </div><!--Coluna 1-->
+          
+          <div class="col-md-6 col-lg-4">
+
+          </div><!--Coluna 2-->
+          <div class="col-md-6 col-lg-4">
+            
+            <div class="footer-newsletter">
+              
+              <h3>Newsletter</h3>
+              <form class="form" action="#" method="post">
+                <input class="campo" placeholder="Nome" required="">
+                <input class="campo" placeholder="E-mail" required="">
+                <br>
+                <br>
+                <button class="btn btn-danger btn-sm">Assinar</button>
+              </form>
+            </div>
+          </div><!--Coluna 3-->
+        </div><!--row-->
+      </div><!--container-->
+      <div class="container">
+        <div class="footer-contact">
+          <div class="row align-items-center">
+            
+            <div class="col-md-6">
+              <br>
+              <h4>E-mail</h4>
+              <p>contato@groove.com.br</p>
+            </div>
+            
+            <div class="col-md-6" style="font-style: normal; font-family: poppins;">
+            
+              <h4>Redes Sociais</h4>
+              <a href="https://twitter.com/"><i class="fab fa-twitter" style="font-style: normal; text-decoration: none; color: #1F1717;">X</i></a>
+              <a href="https://www.facebook.com/"><i class="fab fa-facebook-f" style="font-style: normal; text-decoration: none; color: #1F1717;">Facebook</i></a>
+              <a href="https://www.instagram.com/"><i class="fab fa-instagram" style="font-style: normal; text-decoration: none; color: #1F1717;">Instagram</i></a>
+              <a href="https://br.youtube.com/"><i class="fab fa-youtube" style="font-style: normal; text-decoration: none; color: #1F1717;">Youtube</i></a>
+            
+            </div>
+          </div>
         </div>
       </div>
+      <div class="copyright">
+        <div class="container">
+        
+          <div class="row align-items-center">
+            
+            <div class="col-md-6">
+              <div class="copy-text">
+                <p>&copy; <a href="http://127.0.0.1:5500/html/index.html">Groove</a> - Todos os Direitos Reservados.</p>
+              </div>
+            </div>
 
+            </div>
+          
+          </div>
+        
+        </div><!--container-->
+      </div><!--copyright-->
     </footer>
 
 

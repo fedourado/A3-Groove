@@ -1,8 +1,13 @@
 
 .navbar{
-    background-color: #D7B600;
+    background-color: #DEAC30;
 }
 
 body {
     background-color: #1F1717;
+}
+
+
+.btn-danger{
+    background-color: #C5230D;
 }
