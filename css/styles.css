@@ -1,0 +1,215 @@
+/* Estilos Gerais */
+body {
+    font-family: 'Poppins';
+    background-color: #1C1919;
+}
+
+.row {
+    margin: 0;
+}
+
+.container {
+    padding: 70px 0;
+}
+
+p, li {
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+
+/* Navbar styles */ 
+header .navbar {
+    background-color: #1C1919;
+}
+
+#nav-container {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between !important;
+}
+
+
+#logo {
+    width: 7rem; /* Aproximadamente 100px */
+    margin-left: 4.5rem; /* Aproximadamente 40px */
+}
+
+#span-date {
+    font-size: 12px;
+    padding: 10px;
+}
+
+.navbar-brand {
+    padding: 0;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#navbar-links a {
+    color: #DEAC30;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    
+}
+
+#navbar-links a:hover {
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding: 1rem .9rem;
+}
+
+
+.box {
+    width: 50%;
+    float: left;
+    height: 80px;/*Altura da linha*/
+    color: #1C1919;
+   }
+   
+.lv {
+    border-left: 2px solid;/* Adiciona borda esquerda na div como ser fosse uma linha.*/
+    box-sizing: border-box;
+    color: #1C1919;
+    margin-left: 20px;
+    position: absolute;
+    left: 160px;
+}
+
+/*Banner*/
+
+.container #banner {
+    margin: auto 0;
+    width: 100%;
+}
+
+/*Phrase Area*/
+
+.about-title{
+    color: #FFFFFF;
+    font-weight: 400;
+    text-align: center;
+    font-size: max(25px, 2.55vw);
+}
+
+.about-subtitle{
+    color: #FFFFFF;
+    font-weight: 300;
+    text-align: center;
+    padding: 0 0 10px 0;
+    font-size: max(15px, 2vw);
+}
+
+
+#about-area{
+    background-color: #1C1919;
+}
+
+#about-area img {
+    width: 600px;
+    margin-top: 60px;
+}
+
+#about-texts{
+    color: #FFFFFF;
+    justify-items: center;
+    margin-top: 54px;
+}
+
+#about-texts p{
+}
+
+/*Slider*/
+
+.container-fluid {
+    padding: 0;
+}
+
+#mainSlider .carousel-inner, #mainSlider .carousel-item {
+    height: 80vw;
+}
+
+#mainSlider .carousel-indicators {
+    height: 15vw;;
+}
+
+/*Subscribe area*/
+
+.subscribe-title {
+    color: #FFFFFF;
+    font-weight: 400;
+    text-align: center;
+    padding: 0 0 10px 0;
+    font-size: max(20px, 2vw);
+}
+
+.subscribe-subtitle {
+    color: #FFFFFF;
+    font-weight: 400;
+    text-align: center;
+    padding: 0 0 60px 0;
+    font-size: max(20px, 2vw);
+}
+
+.main-btn {
+    background-color: #802013;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    width: 200px;
+    height: 60px;
+    padding: 10px 30px;
+    transition: .5s;
+    text-decoration: none;
+    
+}
+
+.main-btn:hover {
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #58150c;
+}
+
+.carousel-indicators .active {
+    background-color: #802013;
+}
+
+
+
+/*Footer*/
+
+#space {
+    padding: 15px 0 22px 0;
+    background-color: #DEAC30;
+    margin-bottom: 60px;
+    width: 100%;
+}
+
+#contact-area {
+    text-align: center;
+}
+
+#patrocinadores {
+    margin-bottom: 60px;
+    color: #FFFFFF;
+}
+
+.contact-box {
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+}
+
+.contact-box i {
+    color: #FFFFFF;
+    padding: 20px;
+}
+
+.main-title{
+    margin-bottom: 60px;
+    color: #FFFFFF;
+}
