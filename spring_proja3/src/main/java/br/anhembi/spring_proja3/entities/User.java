@@ -11,17 +11,40 @@ public class User {
      private String nome;
      private int idade;
      private String email;
-     private String reserva;
+     private String dia;
+     private String primReserva;
+     private String segReserva;
+     private boolean situação;
 
      public User() {
      }
 
-     public User(String cpf, String nome, int idade, String email, String reserva) {
+     public User(String cpf, String nome, int idade, String email, String dia, String primReserva, String segReserva,
+               boolean situação) {
           this.cpf = cpf;
           this.nome = nome;
           this.idade = idade;
           this.email = email;
-          this.reserva = reserva;
+          this.dia = dia;
+          this.primReserva = primReserva;
+          this.segReserva = segReserva;
+          this.situação = situação;
+     }
+
+     public String getPrimReserva() {
+          return primReserva;
+     }
+
+     public void setPrimReserva(String primReserva) {
+          this.primReserva = primReserva;
+     }
+
+     public String getSegReserva() {
+          return segReserva;
+     }
+
+     public void setSegReserva(String secReserva) {
+          this.segReserva = secReserva;
      }
 
      public String getCpf() {
@@ -56,19 +79,25 @@ public class User {
           this.email = email;
      }
 
-     public String getReserva() {
-          return reserva;
+     public String getDia() {
+          return dia;
      }
 
-     public void setReserva(String reserva) {
-          this.reserva = reserva;
+     public void setDia(String dia) {
+          this.dia = dia;
      }
 
-     public User copy(){
-          return new User( cpf, nome, idade, email, reserva);
-     }
-     public String toString(){
-          return "User: " + cpf +","+nome + ", (" + idade + ")+ email +\",\"+reserva + ";
+     public boolean isSituação() {
+          return situação;
      }
 
+     public void setSituação(boolean situação) {
+          this.situação = situação;
+     }
+
+     public User copy() {
+
+          return new User(cpf, nome, idade, email, dia, primReserva, segReserva, situação);
+
+     }
 }
