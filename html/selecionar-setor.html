@@ -72,37 +72,79 @@
                     <div _ngcontent-mlv-c90 class="row">
                         <div _ngcontent-mlv-c90 class="COL-12">
                             <app-shopping-cart _ngcontent-mlv-c90 _nghost-mlv-c89>
-                                <h2 _ngcontent-mlv-c89 class="title" id="title-table">Itens escolhidos</h2>
+                                <h2 _ngcontent-mlv-c89 class="title" id="title-table">Escolher Setor</h2>
                                 <div _ngcontent-mlv-c89 class="table-responsive" id="ticket-table">
                                     <table _ngcontent-mlv-c89 id="no-more-tables" class="table table-hover" style="width: 100%;">
                                         <thead _ngcontent-mlv-c89>
                                             <tr _ngcontent-mlv-c89>
                                                 <th _ngcontent-mlv-c89></th>
-                                                <th _ngcontent-mlv-c89>Evento</th>
-                                                <th _ngcontent-mlv-c89>Produto</th>
-                                                <th _ngcontent-mlv-c89></th>
-                                                <th _ngcontent-mlv-c89>Opções</th>
+                                                <th _ngcontent-mlv-c89>Nome</th>
+                                                <th _ngcontent-mlv-c89>E-mail</th>
+                                                <th _ngcontent-mlv-c89>Ingresso</th>
                                             </tr>
                                         </thead>
                                         <tbody _ngcontent-mlv-c89>
                                             <tr _ngcontent-mlv-c89>
-                                                <td _ngcontent-mlv-c89 data-title="no-label"></td>
-                                                <td _ngcontent-mlv-c89 data-title="Evento"></td>
-                                                <td _ngcontent-mlv-c89 data-title="Produto"></td>
-                                                <td _ngcontent-mlv-c89 data-title="no-label"></td>
-                                                <td _ngcontent-mlv-c89>
-                                                </td>
+                                                <td _ngcontent-mlv-c89 class="" data-title="no-label"></td>
+                                                <td _ngcontent-mlv-c89 class="" data-title="Nome"></td>
+                                                <td _ngcontent-mlv-c89 class="" data-title="E-mail"></td>
+                                                <td _ngcontent-mlv-c89 class="" data-title="Ingresso"></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </app-shopping-cart>
+
+                            <div _ngcontent-bei-c94 class="card card-checkout" id="checkout-form-container">
+                                <h5 _ngcontent-bei-c94 class="card-title text-left" style="padding-left: 25px; padding-top: 40px;">Selecionar setor</h5>
+                                <div _ngcontent-bei-c94 class="card-body" style="padding-top: 0px;">
+                                    <div _ngcontent-bei-c94 class="container" style="padding-bottom: 50px; padding-top: 40px;">
+                                        <div _ngcontent-bei-c94 class="row">
+                                            <div _ngcontent-bei-c94 class="col-12 pb-3">
+                                                <h6 id="text-campo" _ngcontent-bei-c94>Escolha o setor que deseja reservar</h6>
+                                            </div>
+                                            <br _ngcontent-bei-c94>
+                                            <br _ngcontent-bei-c94>
+                                            <form id="setorForm"> 
+                                                <label for="setor">Setor:</label>
+                                                <select id="setor" name="setor">
+                                                    <option value="" disabled selected>Setor</option> 
+                                                    <option value="camarote">Camarote</option> 
+                                                    <option value="pista">Pista</option> 
+                                                </select> 
+                                                <br><br> 
+                                                </div>
+                                                <div class="col-12" style="padding-top: 20px;">
+                                                    <button class="btn btn-primary" type="submit" id="finalizar-btn" disabled>Confirmar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        <div id="popup-confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="popupConfirmLabel" aria-hidden="true"> 
+            <div class="modal-dialog" role="document"> 
+                <div class="modal-content"> 
+                    <div class="modal-header"> 
+                        <h5 class="modal-title" id="popupConfirmLabel">Confirmação</h5> 
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                            <span aria-hidden="true">&times;</span> 
+                        </button> 
+                    </div> 
+                    <div class="modal-body"> 
+                        <p>Obrigado pela sua confirmação! Você escolheu o setor: <span id="setorEscolhido"></span>.</p> 
+                    </div> 
+                    <div class="modal-footer"> 
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> 
+                    </div> 
+                </div> 
+            </div>
+        </div>
     </main>
 
 
@@ -115,7 +157,7 @@
         </div>
     </footer>
 
-<script src=""></script>
+<script src="../js/setor.js"></script>
 <script src=""></script>
 </body>
 </html>

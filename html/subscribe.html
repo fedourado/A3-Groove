@@ -257,6 +257,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group mt-3" id="day-select-container"> 
+                                    <label for="day-select" style="color: #fff; margin-bottom: 10px;">Escolha o dia do ingresso:</label> 
+                                    <select class="form-control" id="day-select"> <option value="">Selecione um dia</option> 
+                                        <option value="1">Dia 1 - Dia 20 de Setembro (Sábado)</option> 
+                                        <option value="2">Dia 2 - Dia 21 de Setembro (Domingo)</option> 
+                                    </select> 
+                                </div>
                                 <div class="form-check" style="padding-top: 20px; justify-content: left;">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
@@ -284,6 +291,20 @@
             </div>
         </div>
 
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true"> 
+            <div class="modal-dialog"> 
+                <div class="modal-content"> 
+                    <div class="modal-header"> 
+                        <h5 class="modal-title" id="successModalLabel">Inscrição Concluída</h5> 
+                    </div> 
+                    <div class="modal-body"> Parabéns! Você se inscreveu com sucesso. Seus dados foram enviados para o banco de dados. </div> 
+                    <div class="modal-footer"> 
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button> 
+                    </div> 
+                </div> 
+            </div>
+        </div>
+
 
     </main>
 
@@ -300,5 +321,6 @@
     <script src="..//js/subscribe-mask.js"></script>
     <script src="../js/subscribe.js"></script>
     <script src="../js/subscribe-checkbox.js"></script>
+    <script src="../js/subscribe-remover.js"></script>
 </body>
 </html>

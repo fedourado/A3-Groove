@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ageInput.classList.remove('is-invalid');
     }
 
-    // Event listener para garantir que o campo idade só permita números e seja >= 16
+    // garanti que o campo idade só permita números e seja >= 16
     ageInput.addEventListener('input', function() {
         clearAgeError(); // Limpa a mensagem de erro antes de validar novamente
         validateAge();

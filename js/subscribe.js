@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td></td>
-            <td>Evento</td>
+            <td>Groove</td>
             <td>${ticketType}</td>
             <td></td>
             <td>
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
             phoneInput.classList.remove('is-invalid');
         }
 
-        // Continue only if both validations pass
+        // Continua somente se as duas validações forem
         if (cpfRegex.test(cpf) && phoneRegex.test(phoneNumber)) {
             const email = document.getElementById('email').value;
             const firstName = document.getElementById('name').value;

@@ -89,7 +89,55 @@
             <label for="ticket" style="color: #fff; margin-bottom: 10px;">Ingresso:</label> 
             <input type="text" class="form-control" id="ticket" readonly>
         </div>
+        <div class="form-group mt-3">
+            <button class="btn btn-danger" id="exit-btn" style="margin-top: 10px;">Sair da fila</button>
+        </div>
     </div> 
+
+
+    <!--Pop-up confirmação-->
+    
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true"> 
+        <div class="modal-dialog"> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirmação</h5> 
+                </div> 
+                <div class="modal-body">
+                    <p style="color: #1C1919; font-size: 16px; font-weight: 500;">Você realmente deseja sair da fila?</p>
+                    <p style="padding-bottom: 15px; color: #1C1919;">Ao sair da fila a sua posição não estará mais garantida e para entrar novamente será necessário o preenchimento do formulário.</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="conform-checkbox">
+                        <label class="form-check-label" for="confirm-checkbox" style="font-size: 14px;">
+                            Confirmo que desejo sair da fila
+                        </label>
+                    </div>
+                </div> 
+                <div class="modal-footer"> 
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button> 
+                    <button type="button" class="btn btn-danger" id="confirm-exit-btn">Sair da Fila</button> 
+                </div> 
+            </div> 
+        </div>
+    </div>
+
+        <!--Pop-up sucesso-->
+
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true"> 
+        <div class="modal-dialog"> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    <h5 class="modal-title" id="successModalLabel">Sucesso</h5> 
+                </div> 
+                <div class="modal-body"> 
+                    Você saiu da fila com sucesso. 
+                </div> 
+                <div class="modal-footer"> 
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button> 
+                </div> 
+            </div> 
+        </div>
+    </div>
 </main>
 
 
@@ -156,5 +204,6 @@
     </footer>
 
     <script src="../js/line.js"></script>
+    <script src="../js/line-mak.js"></script>
 </body>
 </html>
