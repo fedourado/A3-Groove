@@ -1,9 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     const checkbox1 = document.getElementById('flexCheckDefault');
     const checkbox2 = document.getElementById('flexCheckChecked');
-    const finalizeBtn = document.getElementById('finalize-btn');
+    const finalizeBtn = document.getElementById('finalizar-btn');
     const cpfInput = document.getElementById('document-number');
     const ageInput = document.getElementById('age');
+
+    // Verificação de existência dos elementos
+    if (!checkbox1 || !checkbox2 || !finalizeBtn || !cpfInput || !ageInput) {
+        console.error('Um ou mais elementos não foram encontrados no DOM');
+        return;
+    }
 
     // Máscara de CPF
     function maskCPF(value) {
@@ -36,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ageInput.classList.remove('is-invalid');
     }
 
-    // garanti que o campo idade só permita números e seja >= 16
+    // Garanti que o campo idade só permita números e seja >= 16
     ageInput.addEventListener('input', function() {
         clearAgeError(); // Limpa a mensagem de erro antes de validar novamente
         validateAge();
@@ -49,16 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
     checkbox1.addEventListener('change', updateButtonState);
     checkbox2.addEventListener('change', updateButtonState);
 
-    // Validação final ao enviar o formulário
-    const checkoutForm = document.getElementById('checkout-form');
-    checkoutForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        validateAge();
-        if (checkoutForm.checkValidity()) {
-            // Processar envio do formulário
-        } else {
-            event.stopPropagation();
-        }
-        checkoutForm.classList.add('was-validated');
-    });
+    // Inicializa o estado do botão de finalizar
+    updateButtonState();
 });

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/style-line.css">
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
@@ -71,7 +72,7 @@
         <form id="cpfForm" style="margin-top: 50px;"> 
             <div class="form-group"> 
                 <label for="cpf" style="color: #fff; margin-bottom: 10px;">CPF:</label> 
-                <input type="text" class="form-control" id="cpf" placeholder="Digite seu CPF" required> 
+                <input type="text" name="cpf" class="form-control" id="cpf" oninput="aplicarMascaraCPF(this)" maxlength="14" placeholder="000.000.000-00" required> 
             </div> 
             <button type="submit" class="btn btn-primary" style="background-color: #DEAC30; border-color: #DEAC30; margin-top: 25px;">Verificar</button> 
         </form> 
@@ -204,6 +205,5 @@
     </footer>
 
     <script src="../js/line.js"></script>
-    <script src="../js/line-mak.js"></script>
 </body>
 </html>

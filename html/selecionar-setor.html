@@ -77,20 +77,9 @@
                                     <table _ngcontent-mlv-c89 id="no-more-tables" class="table table-hover" style="width: 100%;">
                                         <thead _ngcontent-mlv-c89>
                                             <tr _ngcontent-mlv-c89>
-                                                <th _ngcontent-mlv-c89></th>
-                                                <th _ngcontent-mlv-c89>Nome</th>
-                                                <th _ngcontent-mlv-c89>E-mail</th>
-                                                <th _ngcontent-mlv-c89>Ingresso</th>
                                             </tr>
                                         </thead>
-                                        <tbody _ngcontent-mlv-c89>
-                                            <tr _ngcontent-mlv-c89>
-                                                <td _ngcontent-mlv-c89 class="" data-title="no-label"></td>
-                                                <td _ngcontent-mlv-c89 class="" data-title="Nome"></td>
-                                                <td _ngcontent-mlv-c89 class="" data-title="E-mail"></td>
-                                                <td _ngcontent-mlv-c89 class="" data-title="Ingresso"></td>
-                                            </tr>
-                                        </tbody>
+                                    
                                     </table>
                                 </div>
                             </app-shopping-cart>
@@ -127,24 +116,23 @@
                 </div>
             </div>
         </div>
+
         <div id="popup-confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="popupConfirmLabel" aria-hidden="true"> 
             <div class="modal-dialog" role="document"> 
                 <div class="modal-content"> 
                     <div class="modal-header"> 
-                        <h5 class="modal-title" id="popupConfirmLabel">Confirmação</h5> 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
-                            <span aria-hidden="true">&times;</span> 
-                        </button> 
+                        <h5 class="modal-title" id="popupConfirmLabel">Setor Selecionado!</h5> 
                     </div> 
-                    <div class="modal-body"> 
-                        <p>Obrigado pela sua confirmação! Você escolheu o setor: <span id="setorEscolhido"></span>.</p> 
-                    </div> 
+                    <div class="modal-body" style="color: #1C1919;"> 
+                        <div style="padding-bottom: 5px; padding-top: 20px;"> Obrigado pela sua confirmação! </div>
+                        <div style="padding-bottom: 25px;"> Você escolheu o setor: <strong><span id="setorEscolhido"></span></strong></div>
                     <div class="modal-footer"> 
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> 
+                        <button type="button" class="btn btn-primary" id="btn-fechar" data-dismiss="modal">Fechar</button> 
                     </div> 
                 </div> 
             </div>
         </div>
+
     </main>
 
 

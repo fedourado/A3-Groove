@@ -10,3 +10,5 @@ document.addEventListener('DOMContentLoaded', function() {
     checkbox1.addEventListener('change', updateButtonState);
     checkbox2.addEventListener('change', updateButtonState);
 });
+
+
