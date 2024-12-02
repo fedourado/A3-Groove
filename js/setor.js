@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const setorSelect = document.getElementById('setor');
+    const setorSelect = document.getElementById('setor2');
     const confirmButton = document.getElementById('finalizar-btn');
     const setorEscolhido = document.getElementById('setorEscolhido');
     const successModalElement = new bootstrap.Modal(document.getElementById('popup-confirm')); // Inicialize o modal
