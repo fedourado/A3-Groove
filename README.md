@@ -12,7 +12,7 @@ Bem-vindo ao Groove Festival! Este é um projeto de um festival punk, criado par
 
 ## Integrantes
 - Integrante 1: Fernanda Dourada (RA: 12522163757)
-- Integrante 2: Fernanda Giovanni Gonçalves Coutinho (RA: 1252210973)
+- Integrante 2: Fernando Giovanni Gonçalves Coutinho (RA: 1252210973)
 - Integrante 3: Leonardo Silva Barbosa de Souza (RA: 12522160968)
 - Integrante 4: Lucas dos Santos Miranda (RA: 12524132442)
 
