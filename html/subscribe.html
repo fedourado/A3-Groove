@@ -213,54 +213,53 @@
                 Deseja continuar?
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="confirm-remove-button">OK</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" id="confirm-remove-button">Confirmar</button>
                 </div>
             </div>
             </div>
         </div>
         
 
-
-        <div _ngcontent-bei-c94 class="card card-checkout" id="checkout-form-container">
+        <div class="card card-checkout" id="checkout-form-container">
             <div>
-                <h5 _ngcontent-bei-c94 class="card-title text-left" style="padding-left: 25px; padding-top: 40px;">Dados da inscrição</h5>
-                <div _ngcontent-bei-c94 class="card-body">
-                    <div _ngcontent-bei-c94 class="container">
-                        <div _ngcontent-bei-c94 class="row">
-                            <div _ngcontent-bei-c94 class="col-12 pb-3">
-                                <h6 id="text-campo" _ngcontent-bei-c94>Insira abaixo as informações para completar a sua inscrição</h6>
+                <h5 class="card-title text-left" style="padding-left: 25px; padding-top: 40px;">Dados da inscrição</h5>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 pb-3">
+                                <h6 id="text-campo">Insira abaixo as informações para completar a sua inscrição</h6>
                             </div>
-                            <div _ngcontent-bei-c94 class="col-12">
-                                <div _ngcontent-bei-c94 class="row">
-                                    <div _ngcontent-bei-c94 class="col-12">
-                                        <div _ngcontent-bei-c94 class="form-group">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
                                             <label for="email">E-mail</label>
                                             <input autofocus required type="email" placeholder="E-mail" class="form-control ng-untouched ng-pristine ng-invalid" 
                                             minlength="3" id="email">
                                         </div>
                                     </div>
 
-                                    <div _ngcontent-bei-c94 class="col-lg-6 col-12">
-                                        <div _ngcontent-bei-c94 class="form-group">
-                                            <label _ngcontent-bei-c94 for="name">Primeiro nome</label>
-                                            <input _ngcontent-bei-c94 required type="text" placeholder="Primeiro nome" minlength="3" maxlength="20"
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="name">Primeiro nome</label>
+                                            <input required type="text" placeholder="Primeiro nome" minlength="3" maxlength="20"
                                             class="form-control ng-untouched ng-pristine ng-invalid" id="firstName">
                                         </div>
                                     </div>
 
-                                    <div _ngcontent-bei-c94 class="col-lg-6 col-12">
-                                        <div _ngcontent-bei-c94 class="form-group">
-                                            <label _ngcontent-bei-c94 for="last-name">Sobrenome</label>
-                                            <input _ngcontent-bei-c94 required type="text" placeholder="Sobrenome" minlength="3" maxlength="20"
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="last-name">Sobrenome</label>
+                                            <input required type="text" placeholder="Sobrenome" minlength="3" maxlength="20"
                                             class="form-control ng-untouched ng-pristine ng-invalid" id="lastName">
                                         </div>
                                     </div>
 
-                                    <div _ngcontent-bei-c94 class="col-lg-6 col-12">
-                                        <div _ngcontent-bei-c94 class="form-group">
-                                            <label _ngcontent-bei-c94 for="document-number">CPF</label>
-                                            <input _ngcontent-bei-c94 required appcpfvalidator id="document-number" type="text" maxlength="14" placeholder="000.000.000-00"
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="document-number">CPF</label>
+                                            <input required appcpfvalidator id="document-number" type="text" maxlength="14" placeholder="000.000.000-00"
                                             class="form-control ng-touched ng-dirty" wfd-id="id3">
                                             <div class="invalid-feedback">
                                                 O CPF é inválido!
@@ -268,13 +267,13 @@
                                         </div>
                                     </div>
 
-                                    <div _ngcontent-bei-c94 class="col-lg-6 col-12">
-                                        <div _ngcontent-bei-c94 class="form-group">
-                                            <label _ngcontent-bei-c94 for="age"> Idade </label>
-                                            <div _ngcontent-bei-c94 class="age-input ng-invalid is-invalid ng-touched">
-                                                <ngx-intl-tel-input _ngcontent-bei-c94 required _nghost-bei-c84 class="ng-untouched ng-invalid ng-dirty">
-                                                    <div _ngcontent-bei-c84 class="iti iti--allow-dropdown separate-dial-code iti-sdc-3">
-                                                        <input _ngcontent-bei-c84 type="number" id="age" placeholder="Idade"
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="age"> Idade </label>
+                                            <div class="age-input ng-invalid is-invalid ng-touched">
+                                                <ngx-intl-tel-input required class="ng-untouched ng-invalid ng-dirty">
+                                                    <div class="iti iti--allow-dropdown separate-dial-code iti-sdc-3">
+                                                        <input type="number" id="age" placeholder="Idade"
                                                         max="16" validation="true" class="ng-untouched ng-pristine ng-valid form-control">
                                                         <div class="invalid-feedback">
                                                             Você deve ter mais de 16 anos!
