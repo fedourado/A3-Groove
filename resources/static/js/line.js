@@ -3,10 +3,13 @@ const positionOutput = document.getElementById('position');
 const nameOutput = document.getElementById('name');
 const tiketOutput = document.getElementById('ticket');
 const btnVerify = document.getElementById('verify');
-const btnExit = document.getElementById('exit');
+const btnExit = document.getElementById('exit-btn');
 const popConfirmExit = document.getElementById('successModal');
-
-
+const confirmationModalElement = document.getElementById('confirmationModal');
+const confirmationCheckbox = document.getElementById('conform-checkbox');
+const confirmExitButton = document.getElementById('confirm-exit-btn');
+// Criação de uma instância do modal Bootstrap
+const confirmationModal = new bootstrap.Modal(confirmationModalElement);
 const popupExit = new bootstrap.Modal(popConfirmExit); // Inicializa o de saida concluida
 
 function maskCPF(value) {
@@ -36,36 +39,49 @@ btnVerify.addEventListener("click", async () => {
 });
 
 btnExit.addEventListener("click", async () => {
-
     const cpf = cpfInput.value.trim();
 
-  
-
     try {
-
+        // Verifica se o CPF é válido
         if (!isValidCPF(cpf)) {
             showAlert("CPF inválido. Por favor, tente novamente.", "danger");
             clearFields();
             return;
-        } else {
-
-              // Tenta atualizar as reservas Prim e Seg
-            await deleteUserDataOnQueue(cpf);
-            await updateUserSituation(cpf);
-
-            // Exibe o modal de sucesso após ambas as atualizações
-            popupExit.show();
-
         }
-      
+
+        // Abre o modal de confirmação
+        confirmationModal.show();
+
+        // Adiciona um evento ao botão do modal para confirmar a saída da fila
+        confirmExitButton.addEventListener(
+            'click',
+            async function handleExitClick() {
+                if (confirmationCheckbox.checked) {
+                    try {
+                        // Tenta atualizar as reservas e situação do usuário
+                        await deleteUserDataOnQueue(cpf);
+                        await updateUserSituation(cpf);
+
+                        // Exibe o modal de sucesso após ambas as atualizações
+                        popupExit.show();
+
+                        // Fecha o modal de confirmação
+                        confirmationModal.hide();
+
+                        // Remove o evento do botão após a execução
+                        confirmExitButton.removeEventListener('click', handleExitClick);
+                    } catch (error) {
+                        console.error("Erro ao sair da fila:", error);
+                    }
+                } else {
+                    showAlert("Por favor, confirme que deseja sair da fila.", "warning");
+                }
+            }
+        );
     } catch (error) {
-        console.error("Erro ao processar reservas:", error);
-        
+        console.error("Erro ao processar saída da fila:", error);
     }
-
-
 });
-
 
 
 
@@ -147,7 +163,7 @@ async function getUserData(cpf) {
                 const dado = await resp.json();
 
                 // Verifica se o dado retornado é -1 (não está na fila)
-                if (dado === -1) {
+                if (data.situação === false) {
                     showAlert("Você não está na fila no momento.", "warning");
                 } else {
                     positionOutput.value = dado + "°";

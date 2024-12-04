@@ -23,11 +23,10 @@ public class SectorsService {
      private TicketStack primCamaroteStack;
      private TicketStack primPistaStack;
      private TicketStack primPistaPremiumStack;
-     private TicketStack primVIPStack;
+     private TicketStack VIPStack;
      private TicketStack segCamaroteStack;
      private TicketStack segPistaStack;
      private TicketStack segPistaPremiumStack;
-     private TicketStack segVIPStack;
 
      // Método de inicialização com @PostConstruct
      @PostConstruct
@@ -50,9 +49,7 @@ public class SectorsService {
                     case "PrimPistaPremium":
                          primPistaPremiumStack = new TicketStack(qtdDisp);
                          break;
-                    case "PrimVIP":
-                         primVIPStack = new TicketStack(qtdDisp);
-                         break;
+
                     case "SegCamarote":
                          segCamaroteStack = new TicketStack(qtdDisp);
                          break;
@@ -62,8 +59,8 @@ public class SectorsService {
                     case "SegPistaPremium":
                          segPistaPremiumStack = new TicketStack(qtdDisp);
                          break;
-                    case "SegVIP":
-                         segVIPStack = new TicketStack(qtdDisp);
+                    case "VIP":
+                         VIPStack = new TicketStack(qtdDisp);
                          break;
                     default:
                          // Caso algum setor desconhecido, pode lançar uma exceção ou fazer outra ação
@@ -87,8 +84,8 @@ public class SectorsService {
           return primPistaPremiumStack;
      }
 
-     public TicketStack getPrimVIPStack() {
-          return primVIPStack;
+     public TicketStack getVIPStack() {
+          return VIPStack;
      }
 
      public TicketStack getSegCamaroteStack() {
@@ -101,10 +98,6 @@ public class SectorsService {
 
      public TicketStack getSegPistaPremiumStack() {
           return segPistaPremiumStack;
-     }
-
-     public TicketStack getSegVIPStack() {
-          return segVIPStack;
      }
 
      // Método para obter a quantidade disponível de um setor
@@ -142,22 +135,21 @@ public class SectorsService {
      // Método para obter a pilha de um setor com base no nome
      private TicketStack getStackByNome(String nome) {
           switch (nome) {
+
                case "PrimCamarote":
                     return primCamaroteStack;
                case "PrimPista":
                     return primPistaStack;
                case "PrimPistaPremium":
                     return primPistaPremiumStack;
-               case "PrimVIP":
-                    return primVIPStack;
                case "SegCamarote":
                     return segCamaroteStack;
                case "SegPista":
                     return segPistaStack;
                case "SegPistaPremium":
                     return segPistaPremiumStack;
-               case "SegVIP":
-                    return segVIPStack;
+               case "VIP":
+                    return VIPStack;
                default:
                     return null;
           }

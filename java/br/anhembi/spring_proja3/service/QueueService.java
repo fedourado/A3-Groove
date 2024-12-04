@@ -25,6 +25,10 @@ public class QueueService {
      private boolean day2TimerActive;
      private boolean bothTimerActive;
 
+
+     @Autowired
+    private TokenService tokenService;
+    
      @Autowired
      private EmailService emailService;
 
@@ -112,7 +116,7 @@ public class QueueService {
 
           if (!bothQueue.isEmpty() && !bothTimerActive) {
                scheduleDequeueForUser(bothQueue.peek(), bothQueue, "both");
-               sendEmailToFirstUser(bothQueue.peek());
+               sendEmailToFirstPassUser(bothQueue.peek());
           }
      }
 
@@ -135,20 +139,42 @@ public class QueueService {
 
      private void sendEmailToFirstUser(User user) {
           if (user.getEmail() != null && !user.getEmail().isEmpty()) {
-               // Gerar o link com o CPF do usuário
-               String cpf = user.getCpf(); // Supondo que você tenha o CPF do usuário
-               String link = "http://localhost:8080/selecionar-setor.html?cpf=" + cpf; // Monta o link com o CPF como
+
+               String token = tokenService.generateToken(user.getCpf()); // Gera o token associado ao CPF
+    
+               // Gerar o link com o token (em vez do CPF diretamente)
+               String link = "http://localhost:8080/setor-day.html?token=" + token; // Supondo que você tenha o CPF do usuário
                                                                                        // parâmetro
 
                // Corpo do e-mail com HTML para o link clicável
                String body = "Olá, " + user.getNome() +
-                         "Você chegou em primeiro na fila!"
-                         + "Você tem 2 horas para escolher seus setores e garantir seu lugar. "
-                         + "Por favor, acesse este link " + link + " para fazer sua escolha.";
+                         " Você chegou em primeiro na fila!"
+                         + " Agora voçê tem um prazo de 2 horas para escolher seus setores e garantir seu lugar. "
+                         + " Por favor, acesse este link " + link + " para fazer sua escolha. Corre!";
 
                // Envia o e-mail (certifique-se de que o seu serviço de e-mail esteja
                // configurado corretamente)
                emailService.sendEmail(user.getEmail(), "Aviso: Escolha suas Reservas", body);
+          }
+
+     }
+
+     private void sendEmailToFirstPassUser(User user) {
+          if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+
+               String token = tokenService.generateToken(user.getCpf()); // Gera o token associado ao CPF
+    
+               // Gerar o link com o token (em vez do CPF diretamente)
+               String link = "http://localhost:8080/setor-pass.html?token=" +token; 
+
+               // Corpo do e-mail com HTML para o link clicável
+               String body = "Olá, " + user.getNome() +
+                         " Você chegou em primeiro na fila!"
+                         + " Agora você tem um prazo de 2 horas para escolher seus setores e garantir seu lugar. "
+                         + " Por favor, acesse este link " + link + " para fazer sua escolha. Corre!";
+
+               
+               emailService.sendEmail(user.getEmail(), "Aviso: Escolha suas reservas", body);
           }
 
      }

@@ -163,68 +163,95 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const checkoutForm = document.getElementById('checkout-form-container');
-    if (checkoutForm) {
-        finalizeSubscribeBtn.addEventListener('click', async function (event) {
-            event.preventDefault();
-        
-            const cpfInput = document.getElementById('document-number');
-            if (!validateCPF(cpfInput)) {
-                console.log('CPF inválido');
-                return;
-            }
-        
-            const email = document.getElementById('email').value;
-            const name = document.getElementById('name').value + " " + document.getElementById('last-name').value;
-            const age = document.getElementById('age').value;
-        
-            let dia;
-            let situacao = true;
-        
-            if (selectedTicketType === "Groove Day") {
-                const dayText = document.getElementById('day-select').value;
-                dia = (dayText === "Dia 1 - Dia 20 de Setembro (Sábado)") ? "1" : "2";
-            } else if (selectedTicketType === "Groove Pass") {
+if (checkoutForm) {
+    finalizeSubscribeBtn.addEventListener('click', async function (event) {
+        event.preventDefault();
+
+        // Valida CPF
+        const cpfInput = document.getElementById('document-number');
+        if (!validateCPF(cpfInput)) {
+            console.log('CPF inválido');
+            return;
+        }
+
+        // Coleta informações do formulário
+        const email = document.getElementById('email').value;
+        const name = document.getElementById('name').value + " " + document.getElementById('last-name').value;
+        const age = document.getElementById('age').value;
+
+        let dia, situacao = true, primReserva = null, segReserva = null;
+
+        // Define valores com base no tipo de ingresso
+        switch (selectedTicketType) {
+            case "Groove Day":
+                dia = document.getElementById('day-select').value;
+                break;
+            case "Groove Pass":
                 dia = "Pass";
-            } else if (selectedTicketType === "Groove Vip") {
+                break;
+            case "Groove Vip":
                 situacao = false;
                 dia = "VIP";
-            }
-        
-            const url = (selectedTicketType === "Groove Vip") 
-                ? "http://localhost:8080/users/VIP" 
-                : "http://localhost:8080/users";
-        
-            const data = {
-                cpf: cpfInput.value, // Use .value para obter o texto do input
-                email: email,
-                nome: name,
-                idade: age,
-                dia: dia,
-                primReserva: null,
-                segReserva: null,
-                situação: situacao
-            };
-        
-            try {
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data) // Serializa o objeto corretamente
-                });
-        
-                if (response.ok) {
-                    console.log("Usuário adicionado com sucesso!");
-                    submissionConfirmationModal.show();
-                } else {
-                    console.error("Erro ao adicionar o usuário. Status:", response.status);
-                    errorModal.show();
-                }
-            } catch (error) {
-                console.error("Erro na requisição:", error);
+                primReserva = "VIP";
+                segReserva = "VIP";
+                break;
+        }
+
+        // Define URL para envio de dados
+        const url = (dia === "VIP") 
+            ? "http://localhost:8080/users/VIP" 
+            : "http://localhost:8080/users";
+
+        // Prepara dados para envio
+        const data = {
+            cpf: cpfInput.value,
+            email: email,
+            nome: name,
+            idade: age,
+            dia: dia,
+            primReserva: primReserva,
+            segReserva: segReserva,
+            situação: situacao,
+        };
+
+        try {
+            // Envia dados do usuário
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            // Verifica se o usuário foi adicionado
+            if (!response.ok) {
+                console.error("Erro ao adicionar o usuário. Status:", response.status);
                 errorModal.show();
+                return;
             }
-        });
-    }
+
+            // Se o ingresso for VIP, realiza a decrementar o setor VIP
+            if (dia === "VIP") {
+                const sectorVIPUrl = "http://localhost:8080/sectors/"+dia+"/decrement";
+                const decrementVIPResponse = await fetch(sectorVIPUrl, {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                if (!decrementVIPResponse.ok) {
+                    console.error("Erro ao atualizar o setor VIP. Status:", decrementVIPResponse.status);
+                } else {
+                    console.log("Setor VIP atualizado com sucesso.");
+                }
+            }
+
+            // Confirmação final
+            console.log("Usuário adicionado com sucesso!");
+            submissionConfirmationModal.show();
+        } catch (error) {
+            console.error("Erro na requisição:", error);
+            errorModal.show();
+        }
+    });
+}
+
 })

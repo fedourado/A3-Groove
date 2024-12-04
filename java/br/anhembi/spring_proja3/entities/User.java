@@ -87,7 +87,7 @@ public class User {
           this.dia = dia;
      }
 
-     public boolean isSituação() {
+     public boolean getSituação() {
           return situação;
      }
 

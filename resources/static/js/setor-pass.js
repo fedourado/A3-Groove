@@ -1,26 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
     const setorSelect2 = document.getElementById('setor2');
-    const setorSelect1 = document.getElementById("setor");
+    const setorSelect1 = document.getElementById("setor1");
     const confirmButton = document.getElementById('finalizar-btn');
     const setorEscolhido = document.getElementById('setorEscolhido');
-    const successModalElement = new bootstrap.Modal(document.getElementById('popup-confirm'));  
-    //const failureModalElement = new bootstrap.Modal(document.getElementById('popup-failure'));
-    const closeButton = document.getElementById('btn-fechar');
+    const successModalElement = new bootstrap.Modal(document.getElementById('popup-confirm')); // Inicialize o modal
+    const failureModalElement = new bootstrap.Modal(document.getElementById('popup-failure'));
+    const closeButton = document.getElementById('btn-fechar'); // Botão para fechar o modal
     const closeButtonFailure = document.getElementById('btn-fechar-falha');
-    
-    console.log(successModalElement, failureModalElement);
 
-    // Função para obter o parâmetro 'token' da URL
-    function getParameterByName(name) {
+    console.log(successModalElement,failureModalElement);
+
+
+     // Função para obter o parâmetro 'token' da URL
+     function getParameterByName(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name); // Retorna o valor do parâmetro 'token'
     }
-
+    
     const token = getParameterByName('token');
     console.log(token);
-    
-    // Habilita ou desabilita o botão de confirmação com base na escolha de setor
-    setorSelect2.addEventListener('change', function() {
+
+       // Habilita ou desabilita o botão de confirmação com base na escolha de setor
+       setorSelect2.addEventListener('change', function() {
         const setor = setorSelect2.value;
         console.log(setor);
 
@@ -31,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Formulário de seleção de setor
     const setorForm = document.getElementById('setorForm');
     setorForm.addEventListener('submit', function(event) {
         event.preventDefault(); // Previne o comportamento padrão de envio do formulário
@@ -42,19 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
         setorEscolhido.textContent = setor1 + " e " + setor2;
     });
 
-    // Fechar o modal de sucesso
     closeButton.addEventListener('click', function() {
         successModalElement.hide(); // Fechar o modal de confirmação
     });
 
-    // Fechar o modal de falha
-    closeButtonFailure.addEventListener('click', function () {
-        failureModalElement.hide(); // Fechar o modal de falha
+    closeButtonFailure.addEventListener('click', function() {
+        failureModalElement.hide(); // Fechar o modal de confirmação
     });
 
-    // Função que é chamada quando o botão de confirmação é clicado
-    confirmButton.addEventListener('click', async () => {
 
+    confirmButton.addEventListener('click', async () => {
+ // Variável de controle para exibir o modal de erro apenas uma vez
 
         try {
             // Obtém o CPF associado ao token
@@ -70,21 +68,15 @@ document.addEventListener('DOMContentLoaded', function() {
             await updatePrimReserva(cpf);
             await updateSegReserva(cpf);
             await updateSituacao(cpf);
-            await InvalidateToken(token);
-
+            await InvalidateToken(token);   
     
             // Exibe o modal de sucesso após todas as operações concluídas
             successModalElement.show();
             
         } catch (error) {
             console.error("Erro ao processar reservas ou invalidar o token:", error);
-    
-            // Exibe o modal de falha se ocorrer erro
-           
-              //  failureModalElement.show();
-                
-            }
-        })
+          
+        }
     
          async function getUserIdFromToken(token) {
         try {
@@ -113,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert("Houve um erro ao tentar obter o CPF com o token.");
         }
     } 
+
     async function InvalidateToken(token) {
         try {
             // URL do controlador Spring Boot
@@ -139,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
         async function updatePrimReserva(cpf) {
+
             const setor = setorSelect1.value; // Assumindo que setorSelect é um elemento do tipo select onde o usuário escolhe o setor
         
             try {
@@ -149,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         
                 if (response.status === 200) {
+
                     const data = await response.json();
                     console.log(data.dia);
         
@@ -163,10 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
         
                     if (resp.status === 200) {
-                        const setoresValidos = ["Pista", "PistaPremium", "Camarote", "VIP"];
-                        const diasEspeciais = ["VIP", "Pass"];
-        
-                        if (diasEspeciais.includes(data.dia) && setoresValidos.includes(setor)) {
+                       
                             // Decrementar ambos os setores Prim e Seg
                             let primSectorUrl = "http://localhost:8080/sectors/Prim" + setor + "/decrement";
                             let segSectorUrl = "http://localhost:8080/sectors/Seg" + setor + "/decrement";
@@ -192,32 +184,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             if (segDecrementResp.status === 200) {
                                 console.log("Setor Seg atualizado com sucesso.");
                             } else {
-                                console.log("Erro ao atualizar o setor Seg. Status: " + segDecrementResp.status, "warning");
+                                console.log("Erro ao atualizar o setor Seg. Status: " + PrimDecrementResp.status, "warning");
                             }
-                        } else {
-                            // Decrementa com base em Prim ou Seg prefixado ao setor
-                            let day = "";
-                            if (data.dia === "1") {
-                                day = "Prim" + setor;
-                            } else if (data.dia === "2") {
-                                day = "Seg" + setor;
-                            }
-        
-                            let sectorUrl = "http://localhost:8080/sectors/" +day+ "/decrement";
-                            const decrementResp = await fetch(sectorUrl, {
-                                method: "PATCH",
-                                headers: { "Content-Type": "application/json" },
-                            });
-        
-                            if (decrementResp.status === 200) {
-                                console.log("Setor atualizado com sucesso.");
-                            } else {
-                                console.log("Erro ao atualizar o setor. Status: " + decrementResp.status, "warning");
-                            }
-                        }
-        
-                        // **NOVO**: Chamar o endpoint de dequeue apenas se `data.dia` for diferente de VIP
-                        if (data.dia !== "VIP") {
+                        
+                        }       
+                       
                             const dequeueUrl = "http://localhost:8080/queues/"+ data.dia+ "/dequeue";
                             const dequeueResponse = await fetch(dequeueUrl, {
                                 method: "DELETE",
@@ -229,12 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             } else {
                                 console.log("Erro ao realizar dequeue. Status: " + dequeueResponse.status);
                             }
-                        } else {
-                            console.log("Dequeue não chamado pois o dia é VIP.");
-                        }
-                    } else {
-                        console.log("Erro ao atualizar a posição do usuário.", "warning");
-                    }
+                       
                 } else {
                     console.log("CPF não encontrado. Por favor, verifique seu CPF.", "warning");
                 }
@@ -245,87 +211,64 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
     
-    
-    async function updateSegReserva(cpf) {
-        const setor = setorSelect2.value; // Assumindo que setorSelect2 é um elemento do tipo select onde o usuário escolhe o setor
-    
-        try {
-            // Primeira requisição para obter os dados do usuário
-            let url = "http://localhost:8080/users/" + cpf;
-            const response = await fetch(url, {
-                headers: { "Content-Type": "application/json" },
-            });
-    
-            if (response.status === 200) {
-                const data = await response.json();
-                console.log(data.dia);
-    
-                // URL para o PUT (sem basear em data.dia, apenas usando o cpf e setor)
-                let positionUrl = "http://localhost:8080/users/" + cpf + "/seg-reserva";
-    
-                // Faz a requisição para atualizar a posição no método PUT
-                const resp = await fetch(positionUrl, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(setor),
-                });
-    
-                if (resp.status === 200) {
-                    const setoresValidos = ["Pista", "PistaPremium", "Camarote", "VIP"];
-                    const diasEspeciais = ["VIP", "Pass"];
-    
-                    if (diasEspeciais.includes(data.dia) && setoresValidos.includes(setor)) {
-                        // Decrementar ambos os setores Prim e Seg
-                        let primSectorUrl = "http://localhost:8080/sectors/Prim" + setor + "/decrement";
-                        let segSectorUrl = "http://localhost:8080/sectors/Seg" + setor + "/decrement";
-    
-                        // Decrementa Prim
-                        const primDecrementResp = await fetch(primSectorUrl, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                        });
-    
-                        if (primDecrementResp.status === 200) {
-                            console.log("Setor Prim atualizado com sucesso.");
-                        } else {
-                            console.log("Erro ao atualizar o setor Prim. Status: " + primDecrementResp.status, "warning");
-                        }
-    
-                        // Decrementa Seg
-                        const segDecrementResp = await fetch(segSectorUrl, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                        });
-    
-                        if (segDecrementResp.status === 200) {
-                            console.log("Setor Seg atualizado com sucesso.");
-                        } else {
-                            console.log("Erro ao atualizar o setor Seg. Status: " + segDecrementResp.status, "warning");
-                        }
-                    } else {
-                        // Decrementa com base em Prim ou Seg prefixado ao setor
-                        let day = "";
-                        if (data.dia === "1") {
-                            day = "Prim" + setor;
-                        } else if (data.dia === "2") {
-                            day = "Seg" + setor;
-                        }
-    
-                        let sectorUrl = "http://localhost:8080/sectors/" + day + "/decrement";
-                        const decrementResp = await fetch(sectorUrl, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                        });
-    
-                        if (decrementResp.status === 200) {
-                            console.log("Setor atualizado com sucesso.");
-                        } else {
-                            console.log("Erro ao atualizar o setor. Status: " + decrementResp.status, "warning");
-                        }
+        async function updateSegReserva(cpf) {
 
-                        // **NOVO**: Chamar o endpoint de dequeue apenas se `data.dia` for diferente de VIP
-                        if (data.dia !== "VIP") {
-                            const dequeueUrl = "http://localhost:8080/queues/"+ data.dia+ "/dequeue";
+            const setor = setorSelect2.value; // Assumindo que setorSelect é um elemento do tipo select onde o usuário escolhe o setor
+        
+            try {
+                // Primeira requisição para obter os dados do usuário
+                let url = "http://localhost:8080/users/" + cpf;
+                const response = await fetch(url, {
+                    headers: { "Content-Type": "application/json" },
+                });
+        
+                if (response.status === 200) {
+
+                    const data = await response.json();
+                    console.log(data.dia);
+        
+                    // URL para o PUT (sem basear em data.dia, apenas usando o cpf e setor)
+                    let positionUrl = "http://localhost:8080/users/" + cpf + "/seg-reserva";
+        
+                    // Faz a requisição para atualizar a posição no método PUT
+                    const resp = await fetch(positionUrl, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(setor),
+                    });
+        
+                    if (resp.status === 200) {
+                       
+                            // Decrementar ambos os setores Prim e Seg
+                            let primSectorUrl = "http://localhost:8080/sectors/Prim" + setor + "/decrement";
+                            let segSectorUrl = "http://localhost:8080/sectors/Seg" + setor + "/decrement";
+        
+                            // Decrementa Prim
+                            const primDecrementResp = await fetch(primSectorUrl, {
+                                method: "PATCH",
+                                headers: { "Content-Type": "application/json" },
+                            });
+        
+                            if (primDecrementResp.status === 200) {
+                                console.log("Setor Prim atualizado com sucesso.");
+                            } else {
+                                console.log("Erro ao atualizar o setor Prim. Status: " + segDecrementResp.status, "warning");
+                            }
+        
+                            // Decrementa Seg
+                            const segDecrementResp = await fetch(segSectorUrl, {
+                                method: "PATCH",
+                                headers: { "Content-Type": "application/json" },
+                            });
+        
+                            if (segDecrementResp.status === 200) {
+                                console.log("Setor Seg atualizado com sucesso.");
+                            } else {
+                                console.log("Erro ao atualizar o setor Seg. Status: " + PrimDecrementResp.status, "warning");
+                            }
+                                               }       
+                       
+                            const dequeueUrl = "http://localhost:8080/queues/Pass/dequeue";
                             const dequeueResponse = await fetch(dequeueUrl, {
                                 method: "DELETE",
                                 headers: { "Content-Type": "application/json" },
@@ -336,21 +279,15 @@ document.addEventListener('DOMContentLoaded', function() {
                             } else {
                                 console.log("Erro ao realizar dequeue. Status: " + dequeueResponse.status);
                             }
-                        } else {
-                            console.log("Dequeue não chamado pois o dia é VIP.");
-                        }
-                        
-                    }
+                       
                 } else {
-                    console.log("Erro ao atualizar a posição do usuário.", "warning");
+                    console.log("CPF não encontrado. Por favor, verifique seu CPF.", "warning");
                 }
-            } else {
-                console.log("CPF não encontrado. Por favor, verifique seu CPF.", "warning");
+            } catch (error) {
+                console.error("Erro ao buscar dados do usuário:", error);
+                throw error; // Repassa o erro para tratamento externo
             }
-        } catch (error) {
-            console.error("Erro ao buscar dados do usuário:", error);
         }
-    }
 
     async function updateSituacao(cpf) {
         try {
@@ -377,8 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error("Erro na comunicação com o servidor:", error);
         }
-    }
-    
+    }    
     
 })
-  
+});

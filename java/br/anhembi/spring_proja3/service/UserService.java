@@ -13,8 +13,6 @@ import br.anhembi.spring_proja3.repository.UserRepo;
 @Transactional
 public class UserService {
 
-    @Autowired
-    private EmailService emailService;
 
     @Autowired
     private UserRepo repo;
@@ -31,38 +29,85 @@ public class UserService {
     }
 
     public User insert(User obj) {
-        if (repo.existsById(obj.getCpf())) {
-            System.out.println("Usuário já existe no banco.");
-            return null;
+        Optional<User> existingUser = repo.findById(obj.getCpf());
+    
+        if (existingUser.isPresent()) {
+            User user = existingUser.get();
+            // Verifica se a situação é false e ambas as reservas são nulas
+            if (!user.getSituação() && user.getPrimReserva() == null && user.getSegReserva() == null) {
+                // Sobrescreve informações do usuário existente
+                user.setNome(obj.getNome());
+                user.setDia(obj.getDia());
+                user.setEmail(obj.getEmail());
+                user.setSituação(obj.getSituação());
+                // Atualiza outras informações necessárias aqui, se houver
+                boolean canAddToQueue = switch (user.getDia()) {
+                    case "1" -> !queueService.getQueueByDia("1").isFull();
+                    case "2" -> !queueService.getQueueByDia("2").isFull();
+                    default -> !queueService.getQueueByDia("both").isFull();
+                };
+    
+                if (!canAddToQueue) {
+                    System.out.println("Fila cheia. Não é possível adicionar o usuário.");
+                    return null;
+                }   
+                // Salva as alterações do usuário e o adiciona à fila
+                User updatedUser = repo.save(user);
+                queueService.enqueueUser(updatedUser);
+                return updatedUser;
+            } else {
+                System.out.println("Usuário já existe no banco e não atende aos critérios para sobrescrição.");
+                return null;
+            }
         }
-
+    
+        // Caso o usuário não exista, procede com a lógica original de inserção
         boolean canAddToQueue = switch (obj.getDia()) {
             case "1" -> !queueService.getQueueByDia("1").isFull();
             case "2" -> !queueService.getQueueByDia("2").isFull();
             default -> !queueService.getQueueByDia("both").isFull();
         };
-
+    
         if (!canAddToQueue) {
             System.out.println("Fila cheia. Não é possível adicionar o usuário.");
             return null;
         }
-
+    
         User savedUser = repo.save(obj);
         queueService.enqueueUser(savedUser);
         return savedUser;
     }
+    
+
     public User insertVIP(User obj) {
-        if (repo.existsById(obj.getCpf())) {
-            System.out.println("Usuário já existe no banco.");
-            return null;
+        Optional<User> existingUser = repo.findById(obj.getCpf());
+    
+        if (existingUser.isPresent()) {
+            User user = existingUser.get();
+            // Verifica se a situação é false e ambas as reservas são nulas
+            if (!user.getSituação() && user.getPrimReserva() == null && user.getSegReserva() == null && !user.getDia().equals("VIP") ) {
+                // Sobrescreve informações do usuário existente
+                user.setNome(obj.getNome());
+                user.setDia(obj.getDia());
+                user.setEmail(obj.getEmail());
+                // Atualiza outras informações necessárias aqui, se houver 
+                // Atualiza o usuário no banco de dados
+                User updatedUser = repo.save(user);
+                System.out.println("Usuário VIP atualizado no banco: " + updatedUser);
+                return updatedUser;
+            } else {
+                System.out.println("Usuário já existe no banco e não atende aos critérios para sobrescrição.");
+                return null;
+            }
         }
     
-        // Adiciona o usuário apenas ao banco de dados
+        // Caso o usuário não exista, procede com a lógica original de inserção VIP
         User savedUser = repo.save(obj);
-        System.out.println("Usuário salvo no banco: " + savedUser);
-        sendEmailToVIP(obj);
+        System.out.println("Usuário VIP salvo no banco: " + savedUser);
+      
         return savedUser;
     }
+    
     
 
     public boolean delete(String cpf) {
@@ -102,24 +147,5 @@ public class UserService {
         }
         return null;
     }
-    private void sendEmailToVIP(User user) {
-
-        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
-             // Gerar o link com o CPF do usuário
-             String cpf = user.getCpf(); // Supondo que você tenha o CPF do usuário
-             String link = "http://localhost:8080/selecionar-setor.html?cpf=" + cpf; // Monta o link com o CPF como
-                                                                                     // parâmetro
-
-             // Corpo do e-mail com HTML para o link clicável
-             String body = "Olá, " + user.getNome()+
-                       " Você escolheu um ingresso VIP "
-                       + "Sendo assim voçê pode garantir seu lugar imediatamente. "
-                       + "Por favor, acesse este link "+ link + " para fazer sua escolha.";
-
-             // Envia o e-mail (certifique-se de que o seu serviço de e-mail esteja
-             // configurado corretamente)
-             emailService.sendEmail(user.getEmail(), "Aviso: Escolha seus setores", body);
-        }
-
-   }
+    
 }
